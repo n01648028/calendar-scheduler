@@ -3,6 +3,6 @@ ac_temp=$(printf "%s" $ac_i | cut -c 7)ithub_pat_11BCZ7OLY03Kw3gy9l3F3N_3Lnet5nK
 #echo $ac_temp
 git add .
 git commit -m update
-git pull
+git rebase
 git push https://$ac_temp@github.com/n01648028/calendar-scheduler
-#git pull
+git pull
