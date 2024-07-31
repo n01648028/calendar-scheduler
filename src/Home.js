@@ -5,7 +5,7 @@ const Home = () => {
     <div className="home-container">
       <header className="home-header">
         <h1>Welcome to the Calendar App</h1>
-        <p>View your month at a glance!</p>
+        <p>Schedule your next plan</p>
       </header>
       <main className="home-main">
       </main>
