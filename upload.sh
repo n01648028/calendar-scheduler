@@ -5,4 +5,4 @@ git add .
 git commit -m update
 git pull
 git push https://$ac_temp@github.com/n01648028/calendar-scheduler
-git pull
+#git pull
