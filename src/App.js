@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       Home
-      <Calendar />
+      
       <BrowserRouter>
         <div>
           <nav>
@@ -18,7 +18,7 @@ function App() {
           </nav>
           <Routes>
             <Route path="/home" element={<Home />} />
-            <Route path="/home" element={<Calendar />} />
+            <Route path="/calendar" element={<Calendar />} />
           </Routes>
         </div>
       </BrowserRouter>
