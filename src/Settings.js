@@ -1,12 +1,14 @@
 import React from 'react';
-
-const Settings = () => {
-  return (
-    <div>
-      <h1>Settings</h1>
-      <p>Settings page content will goes here.</p>
-    </div>
-  );
-};
-
+class Settings extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {temperature: 0, weatherDescription: ""};
+  }
+  render() {
+    return <div>
+            <p> Welcome to the settings</p>
+             Here this is the settings page
+           </div>;
+  }
+}
 export default Settings;
