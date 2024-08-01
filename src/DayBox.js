@@ -6,8 +6,8 @@ class DayBox extends React.Component {
   }
   render() {
     return <td key={this.props.colIndex} className="calendar-cell">
-                    {this.props.date}
-                  </td>;
+              {this.props.date}
+           </td>;
   }
 }
 export default DayBox;
