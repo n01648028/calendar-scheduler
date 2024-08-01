@@ -1,40 +1,53 @@
 .calendar-container {
-    padding: 20px;
-    text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
+  padding: 20px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  table-layout: fixed;
+}
+
+.calendar-table th,
+.calendar-table td {
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+}
+
+.calendar-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.calendar-cell {
+  height: 50px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-cell:hover {
+  background-color: #e6f7ff;
+}
+
+h2 {
+  color: #0078d4;
+}
+
+.day-plan {
+  margin-top: 20px;
+}
+
   
-  .calendar-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    table-layout: fixed;
-  }
-  
-  .calendar-table th, .calendar-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .calendar-table th {
-    background-color: #f0f0f0;
-    font-weight: bold;
-  }
-  
-  .calendar-cell {
-    height: 50px;
-    background-color: #fff;
-    transition: background-color 0.3s ease;
-  }
-  
-  .calendar-cell:hover {
-    background-color: #e6f7ff;
-  }
-  
-  h2 {
-    color: #0078d4;
-  }
   
   
   
