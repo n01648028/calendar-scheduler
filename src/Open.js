@@ -1,12 +1,13 @@
 import React from 'react';
-
-const Open = () => {
-  return (
-    <div>
-      <h1>Open</h1>
-      <p>Open page content will goes here.</p>
-    </div>
-  );
-};
-
+class Open extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {temperature: 0, weatherDescription: ""};
+  }
+  render() {
+    return <div>
+             Here this is the open page
+           </div>;
+  }
+}
 export default Open;
