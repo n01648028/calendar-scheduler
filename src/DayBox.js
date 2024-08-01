@@ -33,7 +33,3 @@ DayBox.propTypes = {
 };
 
 export default DayBox;
-
-
-
-
