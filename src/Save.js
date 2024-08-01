@@ -1,5 +1,5 @@
 import React from 'react';
-class ItemList extends React.Component {
+class Save extends React.Component {
   constructor(props) {
     super(props);
     this.state = {temperature: 0, weatherDescription: ""};
