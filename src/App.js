@@ -4,6 +4,7 @@ import Home from './Home';
 import Calendar from './Calendar';
 import Settings from './Settings';
 import Save from './Save';
+import Open from './Open';
 
 function App() {
   return (
@@ -20,14 +21,18 @@ function App() {
           <nav>
             <Link to="/home">home</Link> | {" "}
             <Link to="/calendar">Calendar</Link> | {" "}
-            <Link to="/Settings">Settings</Link> | {" "}
+            <Link to="/Open">Open</Link> | {" "}
             <Link to="/Save">Save</Link> | {" "}
+            <Link to="/Settings">Settings</Link> | {" "}
+
           </nav>
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/calendar" element={<Calendar />} />
-            <Route path="/Settings" element={<Settings />} />
+            <Route path="/Open" element={<Open />} />
             <Route path="/Save" element={<Save />} />
+            <Route path="/Settings" element={<Settings />} />
+
           </Routes>
         </div>
       </BrowserRouter>
