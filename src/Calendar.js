@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './Calendar.css';
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import DayBox from './DayBox';
+import DayPlan from './DayPlan';
+import DailyPlan from './DailyPlan';
 
-const ItemList = () => {
+const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const startDay = 1; // Assuming the month starts on Monday
@@ -14,6 +17,14 @@ const ItemList = () => {
     console.log("Day clicked in ItemList:", date); // Debugging log
     setSelectedDate(date);
   };
+
+  const OpenDayPlan = () => {
+    window.location.pathname = "/dayplan";
+  }
+
+  const OpenDailyPlan = () => {
+    window.location.pathname = "/dailyplan";
+  }
 
   return (
     <div className="calendar-container">
@@ -49,8 +60,8 @@ const ItemList = () => {
       </table>
       {selectedDate && (
         <div className="day-plan">
-          <h2>Day Plan</h2>
-          <h3>Daily Plan</h3>
+          <h2 onClick={OpenDayPlan}>Day Plan</h2>
+          <h3 onClick={OpenDailyPlan}>Daily Plan</h3>
           <p>Selected Date: {selectedDate}</p>
         </div>
       )}
@@ -58,7 +69,4 @@ const ItemList = () => {
   );
 };
 
-export default ItemList;
-
-
-
+export default Calendar;

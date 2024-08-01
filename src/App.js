@@ -5,6 +5,8 @@ import Calendar from './Calendar';
 import Settings from './Settings';
 import Save from './Save';
 import Open from './Open';
+import DayPlan from './DayPlan';
+import DailyPlan from './DailyPlan';
 
 function App() {
   return (
@@ -32,7 +34,8 @@ function App() {
             <Route path="/Open" element={<Open />} />
             <Route path="/Save" element={<Save />} />
             <Route path="/Settings" element={<Settings />} />
-
+            <Route path="/dayplan" element={<DayPlan />} />
+            <Route path="/dailyplan" element={<DailyPlan />} />
           </Routes>
         </div>
       </BrowserRouter>
