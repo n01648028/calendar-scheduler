@@ -1,5 +1,6 @@
 import React from 'react';
 import './Calendar.css';
+import DayBox from './DayBox'
 
 const ItemList = () => {
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -29,9 +30,7 @@ const ItemList = () => {
                 const dateIndex = rowIndex * 7 + colIndex;
                 const date = dateIndex < startDay ? null : dates[dateIndex - startDay];
                 return (
-                  <td key={colIndex} className="calendar-cell">
-                    {date}
-                  </td>
+                  <DayBox colIndex={colIndex} date={date} />
                 );
               })}
             </tr>
