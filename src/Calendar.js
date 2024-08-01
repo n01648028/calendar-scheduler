@@ -2,7 +2,7 @@ import React from 'react';
 import './Calendar.css';
 import DayBox from './DayBox'
 
-const ItemList = () => {
+const Calendar = () => {
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const startDay = 1; // Assuming the month starts on Monday
   const totalDays = 31;
@@ -41,5 +41,4 @@ const ItemList = () => {
   );
 }
 
-export default ItemList;
-
+export default Calendar;
