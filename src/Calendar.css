@@ -1,0 +1,50 @@
+
+
+.calendar-container {
+  background: rgba(81, 178, 62, 0.6); 
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 800px;
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar-table th,
+.calendar-table td {
+  border: 1px solid #000000;
+  padding: 10px;
+  text-align: center;
+}
+
+.calendar-cell {
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.calendar-cell:hover {
+  background: rgba(30, 145, 239, 0.3);
+}
+
+.day-plan {
+  background: #c7cd26;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+
+h2 {
+  color: #e7e5e5;
+}
+
+
+  
+  
+  
+  
+  
