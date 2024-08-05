@@ -44,7 +44,7 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
             placeholder="Add new plan"
           />
           <select value={newCategory} onChange={(e) => setNewCategory(e.target.value)}>
-            <option value="Music">Music</option>
+            <option value="Music">Music Concert</option>
             <option value="Event">Event</option>
           </select>
           <button onClick={handleAddPlan}>Add a Plan</button>
@@ -61,7 +61,7 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
 
 DayBox.propTypes = {
   colIndex: PropTypes.number.isRequired,
-  date: PropTypes.number,
+  date: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   isActive: PropTypes.bool.isRequired,
 };
