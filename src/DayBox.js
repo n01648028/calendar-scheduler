@@ -9,8 +9,8 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
 
   const handleClick = () => {
     onClick(date);
-    // Toggle form visibility
     setShowPlanForm((prev) => !prev);
+    console.log('Cell clicked, showPlanForm:', !showPlanForm); // Debugging line
   };
 
   const handleAddPlan = () => {
@@ -21,7 +21,8 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
       ]);
       setNewPlan('');
       setNewCategory('Music');
-      setShowPlanForm(false); // Close form after adding plan
+      setShowPlanForm(false); 
+      console.log('Plan added:', { plan: newPlan, category: newCategory }); // Debugging line
     }
   };
 
@@ -64,6 +65,7 @@ DayBox.propTypes = {
 };
 
 export default DayBox;
+
 
 
 
