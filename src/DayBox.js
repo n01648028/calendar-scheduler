@@ -8,9 +8,11 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
   const [newCategory, setNewCategory] = useState('Music');
 
   const handleClick = () => {
-    onClick(date);
-    setShowPlanForm(true);
-    console.log('Cell clicked, showPlanForm:', true); // Debugging line
+    if (date !== null && date !== undefined) { // Ensure date is valid
+      onClick(date);
+      setShowPlanForm(true);
+      console.log('Cell clicked, showPlanForm:', true); // Debugging line
+    }
   };
 
   const handleAddPlan = () => {
@@ -59,7 +61,7 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
 
 DayBox.propTypes = {
   colIndex: PropTypes.number.isRequired,
-  date: PropTypes.number.isRequired,
+  date: PropTypes.number,
   onClick: PropTypes.func.isRequired,
   isActive: PropTypes.bool.isRequired,
 };

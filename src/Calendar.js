@@ -37,7 +37,7 @@ const ItemList = () => {
                   <DayBox
                     key={dateIndex}
                     colIndex={colIndex}
-                    date={date || 0} // Use 0 or another placeholder for null dates
+                    date={date || null } // Use 0 or another placeholder for null dates
                     onClick={handleDayClick}
                     isActive={selectedDate === date} // Ensure isActive prop is passed correctly
                   />

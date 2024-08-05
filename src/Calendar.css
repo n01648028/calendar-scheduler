@@ -27,7 +27,7 @@
 }
 
 .calendar-cell:hover {
-  background: rgba(30, 145, 239, 0.3);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .day-plan {
@@ -47,8 +47,9 @@ h2 {
   margin-top: 5px;
   padding: 5px;
   background-color: #ffffff;
-  border: 1px solid #ccc;
   border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
   width: 100px; /* Adjust width to make it smaller */
 }
 
