@@ -5,7 +5,7 @@ import DayBox from './DayBox';
 const ItemList = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const startDay = 1; 
+  const startDay = 1; // Adjust based on the starting day of the month
   const totalDays = 31;
 
   const dates = Array.from({ length: totalDays }, (_, i) => i + 1);
@@ -37,8 +37,9 @@ const ItemList = () => {
                   <DayBox
                     key={dateIndex}
                     colIndex={colIndex}
-                    date={date}
-                    onClick={handleDayClick} // Pass handleDayClick as onClick prop
+                    date={date || 0} // Use 0 or another placeholder for null dates
+                    onClick={handleDayClick}
+                    isActive={selectedDate === date} // Ensure isActive prop is passed correctly
                   />
                 );
               })}
@@ -49,7 +50,7 @@ const ItemList = () => {
       {selectedDate && (
         <div className="weather-plan">
           <h2>Weather:</h2>
-
+          {/* Add weather component or data here */}
         </div>
       )}
     </div>
@@ -57,6 +58,9 @@ const ItemList = () => {
 };
 
 export default ItemList;
+
+
+
 
 
 
