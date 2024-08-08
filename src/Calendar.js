@@ -2,18 +2,27 @@ import React, { useState } from 'react';
 import './Calendar.css';
 import DayBox from './DayBox';
 
-const ItemList = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
+class Calendar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedDate: ""
+    };
+  }
+  setSelectedDate(date){
+    this.state.selectedDate = date;
+    this.setState(prevState => (this.state));
+  };
+  handleDayClick = (date) => {
+    console.log("Day clicked in ItemList:", date); 
+    this.setSelectedDate(date);
+  };
+  render() {
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const startDay = 1; // Adjust based on the starting day of the month
   const totalDays = 31;
 
   const dates = Array.from({ length: totalDays }, (_, i) => i + 1);
-
-  const handleDayClick = (date) => {
-    console.log("Day clicked in ItemList:", date); 
-    setSelectedDate(date);
-  };
 
   return (
     <div className="calendar-container">
@@ -38,8 +47,8 @@ const ItemList = () => {
                     key={dateIndex}
                     colIndex={colIndex}
                     date={date || null } // Use 0 or another placeholder for null dates
-                    onClick={handleDayClick}
-                    isActive={selectedDate === date} // Ensure isActive prop is passed correctly
+                    onClick={this.handleDayClick}
+                    isActive={this.state.selectedDate === date} // Ensure isActive prop is passed correctly
                   />
                 );
               })}
@@ -47,7 +56,7 @@ const ItemList = () => {
           ))}
         </tbody>
       </table>
-      {selectedDate && (
+      {this.state.selectedDate && (
         <div className="weather-plan">
           <h2>Weather:</h2>
           {/* Add weather component or data here */}
@@ -55,12 +64,7 @@ const ItemList = () => {
       )}
     </div>
   );
-};
+  }
+}
 
-export default ItemList;
-
-
-
-
-
-
+export default Calendar;
