@@ -22,9 +22,9 @@
 }
 
 .calendar-cell {
-  cursor: pointer;
-  transition: background 0.3s ease;
+  position: relative;
 }
+
 
 .calendar-cell:hover {
   background: rgba(255, 255, 255, 0.3);
@@ -42,32 +42,40 @@ h2 {
 }
 
 .plan-form {
-  display: flex;
-  flex-direction: column;
-  margin-top: 5px;
-  padding: 5px;
+  position: absolute;
+  top: 100%; /* Position the form directly below the cell */
+  left: -5px; 
+  padding: 10px; /* Adjust padding as needed */
+  border: 5px solid #242424;
   background-color: #ffffff;
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100px; /* Adjust width to make it smaller */
+  z-index: 10;
+  width: calc(100% + 10px); /* Make the form slightly wider than the cell */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  border-radius: 15px; /* Add rounded corners */
 }
 
 .plan-form input,
 .plan-form select {
   margin-bottom: 5px;
-  font-size: 0.8em; /* Adjust font size to make it smaller */
-  padding: 3px; /* Adjust padding to make it smaller */
+  font-size: 0.8em; /* Adjust font size */
+  padding: 3px; /* Adjust padding */
+  width: calc(100% - 6px); /* Ensure inputs fit within the form's width, considering padding and border */
 }
 
 .plan-form button {
   align-self: center;
-  font-size: 0.8em; /* Adjust font size to make it smaller */
-  padding: 3px 5px; /* Adjust padding to make it smaller */
+  font-size: 0.8em; /* Adjust font size */
+  padding: 3px 5px; /* Adjust padding */
 }
 
 
-
+.remove-plan-button {
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
 
   
   

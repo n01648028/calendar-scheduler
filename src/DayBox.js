@@ -16,9 +16,12 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
   const handleClick = () => {
     if (date !== null && date !== undefined) {
       onClick(date);
-      setShowPlanForm(true);
-      console.log('Cell clicked, showPlanForm:', true);
+      setShowPlanForm(true); // Show the form when the cell is clicked
     }
+  };
+
+  const handleFormClick = (e) => {
+    e.stopPropagation(); // Prevent click event from propagating to the cell
   };
 
   const handleAddPlan = () => {
@@ -31,8 +34,18 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
       localStorage.setItem(`plans_${date}`, JSON.stringify(updatedPlans)); // Save plans specific to this date
       setNewPlan('');
       setNewCategory('Music');
+      setShowPlanForm(false); // Hide the form after adding a plan
+    }
+  };
+
+  const handleRemovePlan = (index) => {
+    const updatedPlans = plans.filter((_, i) => i !== index);
+    setPlans(updatedPlans);
+    localStorage.setItem(`plans_${date}`, JSON.stringify(updatedPlans)); // Update local storage
+
+    // Hide the form if there are no plans left
+    if (updatedPlans.length === 0) {
       setShowPlanForm(false);
-      console.log('Plan added:', { plan: newPlan, category: newCategory });
     }
   };
 
@@ -44,7 +57,7 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
     >
       {date}
       {isActive && showPlanForm && (
-        <div className="plan-form">
+        <div className="plan-form" onClick={handleFormClick}>
           <input
             type="text"
             value={newPlan}
@@ -60,7 +73,10 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
       )}
       <ul>
         {plans.map((plan, index) => (
-          <li key={index}>{plan.plan} - {plan.category}</li>
+          <li key={index}>
+            {plan.plan} - {plan.category}
+            <button className="remove-plan-button" onClick={() => handleRemovePlan(index)}>Remove</button>
+          </li>
         ))}
       </ul>
     </td>
@@ -75,3 +91,4 @@ DayBox.propTypes = {
 };
 
 export default DayBox;
+
