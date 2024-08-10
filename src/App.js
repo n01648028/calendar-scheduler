@@ -32,6 +32,7 @@ function App() {
             <Route path="/Open" element={<Open />} />
             <Route path="/Save" element={<Save />} />
             <Route path="/Settings" element={<Settings />} />
+            <Route path="/DayPlan/:day" element={<DayPlan plans={dayPlans} />} />
 
           </Routes>
         </div>
