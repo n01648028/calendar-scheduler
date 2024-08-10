@@ -1,68 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const DayBox = ({ date, colIndex, onClick, isActive }) => {
+const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
   const [showPlanForm, setShowPlanForm] = useState(false);
   const [plans, setPlans] = useState([]);
   const [newPlan, setNewPlan] = useState('');
   const [newCategory, setNewCategory] = useState('Music');
-  const navigate=useNavigate();
 
   useEffect(() => {
-    // Load plans for the specific date from local storage
     const savedPlans = JSON.parse(localStorage.getItem(`plans_${date}`)) || [];
     setPlans(savedPlans);
   }, [date]);
 
+  useEffect(() => {
+    if (date !== null && date !== undefined) {
+      localStorage.setItem(`plans_${date}`, JSON.stringify(plans));
+    }
+  }, [plans, date]);
+
   const handleClick = () => {
     if (date !== null && date !== undefined) {
       onClick(date);
-      setShowPlanForm(true); // Show the form when the cell is clicked
+      setShowPlanForm(!showPlanForm);
     }
   };
 
   const handleFormClick = (e) => {
-    e.stopPropagation(); // Prevent click event from propagating to the cell
+    e.stopPropagation();
   };
 
   const handleAddPlan = () => {
     if (newPlan.trim()) {
-      const updatedPlans = [
-        ...plans,
-        { plan: newPlan, category: newCategory },
-      ];
+      const updatedPlans = [...plans, { plan: newPlan, category: newCategory }];
       setPlans(updatedPlans);
-      localStorage.setItem(`plans_${date}`, JSON.stringify(updatedPlans)); // Save plans specific to this date
       setNewPlan('');
       setNewCategory('Music');
-      setShowPlanForm(false); // Hide the form after adding a plan
+      setShowPlanForm(false);
     }
   };
 
   const handleRemovePlan = (index) => {
     const updatedPlans = plans.filter((_, i) => i !== index);
     setPlans(updatedPlans);
-    localStorage.setItem(`plans_${date}`, JSON.stringify(updatedPlans)); // Update local storage
-
-    // Hide the form if there are no plans left
     if (updatedPlans.length === 0) {
       setShowPlanForm(false);
     }
   };
 
-  const GotoDayPlan = () => {
-    navigate("/DayPlan/" + date);
-  };
-
   return (
-    <td
-      key={colIndex}
-      className="calendar-cell"
-      onClick={handleClick}
-    >
+    <td key={colIndex} className="calendar-cell" onClick={handleClick} style={cellStyle}>
       {date}
-      {isActive && showPlanForm && (
+      {isActive && showForm && showPlanForm && (
         <div className="plan-form" onClick={handleFormClick}>
           <input
             type="text"
@@ -75,14 +63,13 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
             <option value="Event">Event</option>
           </select>
           <button onClick={handleAddPlan}>Add a Plan</button>
-          <button onClick={GotoDayPlan}>Day Plan</button>
         </div>
       )}
       <ul>
         {plans.map((plan, index) => (
           <li key={index}>
             {plan.plan} - {plan.category}
-            <button className="remove-plan-button" onClick={() => handleRemovePlan(index)}>Remove</button>
+            <button onClick={() => handleRemovePlan(index)}>Remove</button>
           </li>
         ))}
       </ul>
@@ -95,7 +82,8 @@ DayBox.propTypes = {
   date: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   isActive: PropTypes.bool.isRequired,
+  showForm: PropTypes.bool.isRequired, // Updated to showForm
+  cellStyle: PropTypes.object.isRequired, // Updated to cellStyle
 };
 
 export default DayBox;
-

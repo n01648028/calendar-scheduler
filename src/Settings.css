@@ -1,0 +1,50 @@
+.settings-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 50%;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  .settings-option {
+    margin-bottom: 15px;
+  }
+  
+  .settings-option label {
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .settings-option input[type="checkbox"] {
+    margin-left: 10px;
+  }
+  
+  .settings-option input[type="color"] {
+    margin-left: 10px;
+    height: 30px;
+    width: 50px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .settings-option input[type="number"] {
+    margin-left: 10px;
+    width: 60px;
+  }
+  
+  button {
+    background-color: #0048FF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  button:hover {
+    background-color: #003bbf;
+  }
+  
