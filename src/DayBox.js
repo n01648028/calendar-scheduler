@@ -75,6 +75,7 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
             <option value="Event">Event</option>
           </select>
           <button onClick={handleAddPlan}>Add a Plan</button>
+          <button onClick={GotoDayPlan}>Day Plan</button>
         </div>
       )}
       <ul>
