@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const DayBox = ({ date, colIndex, onClick, isActive }) => {
@@ -7,24 +7,32 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
   const [newPlan, setNewPlan] = useState('');
   const [newCategory, setNewCategory] = useState('Music');
 
+  useEffect(() => {
+    // Load plans for the specific date from local storage
+    const savedPlans = JSON.parse(localStorage.getItem(`plans_${date}`)) || [];
+    setPlans(savedPlans);
+  }, [date]);
+
   const handleClick = () => {
-    if (date !== null && date !== undefined) { // Ensure date is valid
+    if (date !== null && date !== undefined) {
       onClick(date);
       setShowPlanForm(true);
-      console.log('Cell clicked, showPlanForm:', true); // Debugging line
+      console.log('Cell clicked, showPlanForm:', true);
     }
   };
 
   const handleAddPlan = () => {
     if (newPlan.trim()) {
-      setPlans((prevPlans) => [
-        ...prevPlans,
+      const updatedPlans = [
+        ...plans,
         { plan: newPlan, category: newCategory },
-      ]);
+      ];
+      setPlans(updatedPlans);
+      localStorage.setItem(`plans_${date}`, JSON.stringify(updatedPlans)); // Save plans specific to this date
       setNewPlan('');
       setNewCategory('Music');
       setShowPlanForm(false);
-      console.log('Plan added:', { plan: newPlan, category: newCategory }); // Debugging line
+      console.log('Plan added:', { plan: newPlan, category: newCategory });
     }
   };
 
