@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const DayBox = ({ date, colIndex, onClick, isActive }) => {
@@ -6,6 +7,7 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
   const [plans, setPlans] = useState([]);
   const [newPlan, setNewPlan] = useState('');
   const [newCategory, setNewCategory] = useState('Music');
+  const navigate=useNavigate();
 
   useEffect(() => {
     // Load plans for the specific date from local storage
@@ -47,6 +49,10 @@ const DayBox = ({ date, colIndex, onClick, isActive }) => {
     if (updatedPlans.length === 0) {
       setShowPlanForm(false);
     }
+  };
+
+  const GotoDayPlan = () => {
+    navigate("/DayPlan/" + date);
   };
 
   return (
