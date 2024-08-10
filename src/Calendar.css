@@ -1,7 +1,7 @@
 
 
 .calendar-container {
-  background: rgba(81, 178, 62, 0.6); 
+  background: rgba(0, 72, 255, 0.6); 
   padding: 20px;
   border-radius: 10px;
   margin: 20px auto;
@@ -38,7 +38,7 @@
 }
 
 h2 {
-  color: #0e95ca;
+  color: #ffffff;
 }
 
 .plan-form {

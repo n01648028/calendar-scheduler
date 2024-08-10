@@ -1,10 +1,10 @@
 body {
-  background-color: #c7cd26; 
-  background-size: cover;
-  background-position: center;
+  background-color: #f4f4f4; /* Light background for a clean look */
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+  color: #333; /* Dark text for readability */
 }
+
 .App {
   text-align: center;
 }
@@ -21,18 +21,30 @@ body {
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #ffffff; /* White background for the header */
+  border-bottom: 1px solid #ddd; /* Light border for separation */
+  min-height: 60px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: rgb(255, 255, 255);
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  color: #333;
+}
+
+.App-header h1 {
+  font-size: 1.5rem;
+  margin: 0;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #007bff; /* Bright link color for visibility */
+  text-decoration: none;
+}
+
+.App-link:hover {
+  text-decoration: underline;
 }
 
 @keyframes App-logo-spin {
@@ -50,6 +62,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 999;
 }
