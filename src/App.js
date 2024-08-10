@@ -7,6 +7,11 @@ import Save from './Save';
 import Open from './Open';
 
 function App() {
+  const [dayPlans, setDayPlans] = useState([]);
+  var i;
+  for(i=0;i!=30;i++){
+    dayPlans.push([]);
+  }
   return (
     <div className="App">
       <br></br>
