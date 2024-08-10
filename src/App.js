@@ -1,10 +1,12 @@
 import './App.css';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link,} from 'react-router-dom';
 import Home from './Home';
 import Calendar from './Calendar';
 import Settings from './Settings';
 import Save from './Save';
 import Open from './Open';
+import DayPlan from './DayPlan';
 
 function App() {
   const [dayPlans, setDayPlans] = useState([]);
