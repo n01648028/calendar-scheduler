@@ -6,6 +6,7 @@ import Calendar from './Calendar';
 import Settings from './Settings';
 import Save from './Save';
 import Open from './Open';
+import UseParams from './UseParams';
 import DayPlan from './DayPlan';
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
             <Route path="/Open" element={<Open />} />
             <Route path="/Save" element={<Save />} />
             <Route path="/Settings" element={<Settings />} />
-            <Route path="/DayPlan/:day" element={<DayPlan plans={dayPlans} />} />
+            <Route path="/DayPlan/:day" element={<UseParams><DayPlan plans={dayPlans} /></UseParams>} />
 
           </Routes>
         </div>

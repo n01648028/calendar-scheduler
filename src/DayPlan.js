@@ -1,10 +1,16 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 class DayPlan extends React.Component {
   constructor(props) {
     super(props);
     this.state = {temperature: 0, weatherDescription: ""};
   }
   render() {
+    var { day } = this.props.params;
+    if(this.props.plans[day].length == 0){
+      alert("a");
+      this.props.plans[day].push("a");
+    }
     return <div>
              Make your day plan.
              <table>
