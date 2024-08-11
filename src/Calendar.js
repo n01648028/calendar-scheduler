@@ -13,6 +13,7 @@ const ItemList = () => {
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const startDay = 1; // Adjust based on the starting day of the month
   const totalDays = 31;
+  const today = new Date();
 
   const dates = Array.from({ length: totalDays }, (_, i) => i + 1);
 
@@ -31,7 +32,7 @@ const ItemList = () => {
   return (
     <div className="calendar-container" style={{ backgroundColor: settings.calendarColor }}>
       <h1>Calendar</h1>
-      <h2>August</h2>
+      <h2>{today.getMonth()}</h2>
       <table className="calendar-table">
         <thead>
           <tr>
