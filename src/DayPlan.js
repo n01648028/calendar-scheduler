@@ -8,7 +8,8 @@ class DayPlan extends React.Component {
     super(props);
     this.state = {day: 0, plan: []};
   }
-  SetPlan(event, plan) {
+  SetPlan(event, plan, i) {
+    alert(i);
     plan[0]=event.target.value;
     this.setState(prevState => (this.state));
   }
@@ -50,37 +51,43 @@ class DayPlan extends React.Component {
                    <img src={close} onClick={() => {this.CloseDone(this.state.plan[0])}} />
                  </td>
                </tr>];
-    for(i=0;i!=11;i++){
+    for(i=1;i!=12;i++){
       periods.push(<tr>
                      <td style={{"border-style": "solid", "border-color": "black"}}>
-                       {i+1}:00 am<br />
-                       {i+2}:00 am
+                       {i}:00 am<br />
+                       {i+1}:00 am
                      </td>
                      <td style={{"border-style": "solid", "border-color": "black"}}>
-                       Type here
+                       <input style={{backgroundColor:this.state.plan[i][1]}} type="text" onChange={(event) => {this.SetPlan(event, this.state.plan[i], i)}} value={this.state.plan[i][0]} />
+                       <img src={checkmark} onClick={() => {this.Done(this.state.plan[i])}} />
+                       <img src={reset} onClick={() => {this.ClearDone(this.state.plan[i])}} />
+                       <img src={close} onClick={() => {this.CloseDone(this.state.plan[i])}} />
                      </td>
                    </tr>);
     }
-    for(i=0;i!=10;i++){
-      periods.push(<tr>
-                     <td style={{"border-style": "solid", "border-color": "black"}}>
-                       {i+1}:00 pm<br />
-                       {i+2}:00 pm
-                     </td>
-                     <td style={{"border-style": "solid", "border-color": "black"}}>
-                       Type here
-                     </td>
-                   </tr>);
-    }
-    periods.push(<tr>
-                   <td style={{"border-style": "solid", "border-color": "black"}}>
-                     11:00 pm<br />
-                     12:00 am
-                   </td>
-                   <td style={{"border-style": "solid", "border-color": "black"}}>
-                     Type here
-                   </td>
-                 </tr>);
+    //for(i=0;i!=10;i++){
+    //  periods.push(<tr>
+    //                 <td style={{"border-style": "solid", "border-color": "black"}}>
+    //                   {i+1}:00 pm<br />
+    //                   {i+2}:00 pm
+    //                 </td>
+    //                 <td style={{"border-style": "solid", "border-color": "black"}}>
+    //                   <input style={{backgroundColor:this.state.plan[i+12][1]}} type="text" onChange={(event) => {this.SetPlan(event, this.state.plan[i+12])}} value={this.state.plan[i+12][0]} />
+    //                   <img src={checkmark} onClick={() => {this.Done(this.state.plan[i+12])}} />
+    //                   <img src={reset} onClick={() => {this.ClearDone(this.state.plan[i+12])}} />
+    //                   <img src={close} onClick={() => {this.CloseDone(this.state.plan[i+12])}} />
+    //                 </td>
+    //               </tr>);
+    //}
+    //periods.push(<tr>
+    //               <td style={{"border-style": "solid", "border-color": "black"}}>
+    //                 11:00 pm<br />
+    //                 12:00 am
+    //               </td>
+    //               <td style={{"border-style": "solid", "border-color": "black"}}>
+    //                 Type here22
+    //               </td>
+    //             </tr>);
     return <div>
              Make your day plan for day {day}.
              <table>
