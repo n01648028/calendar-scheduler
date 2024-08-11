@@ -13,8 +13,8 @@ const ItemList = () => {
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const months = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const today = new Date();
-  const totalDays = new Date(today.getYear(), today.getMonth()+1, 0).getDate();
-  const startDay = new Date(today.getYear(), today.getMonth(), 1).getDay(); // Adjust based on the starting day of the month
+  const totalDays = new Date(today.getFullYear(), today.getMonth()+1, 0).getDate();
+  const startDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay(); // Adjust based on the starting day of the month
 
   const dates = Array.from({ length: totalDays }, (_, i) => i + 1);
 
