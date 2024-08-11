@@ -1,9 +1,30 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import checkmark from './checkmark.svg';
+import reset from './reset.svg';
+import close from './close.svg';
 class DayPlan extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {temperature: 0, weatherDescription: ""};
+    this.state = {day: 0, plan: [], weatherDescription: ""};
+  }
+  SetPlan(event, plan) {
+    plan[0]=event.target.value;
+    this.setState(prevState => (this.state));
+    //alert(JSON.stringify(plan));
+  }
+  Done(plan) {
+    plan[1]="green";
+    this.setState(prevState => (this.state));
+  }
+  ClearDone(plan) {
+    plan[1]="";
+    this.setState(prevState => (this.state));
+  }
+  CloseDone(plan) {
+    plan[0]="";
+    plan[1]="";
+    this.setState(prevState => (this.state));
   }
   render() {
     var i;
@@ -11,8 +32,12 @@ class DayPlan extends React.Component {
     var { day } = this.props.params;
     if(this.props.plans[day-1].length == 0){
       for(i=0;i!=30;i++){
-        this.props.plans[day-1].push(["", 0]);
+        this.props.plans[day-1].push(["", ""]);
       }
+    }
+    if(this.state.day != day){
+      this.state.day = day;
+      this.state.plan = this.props.plans[day-1];
     }
     periods = [<tr>
                  <td style={{"border-style": "solid", "border-color": "black"}}>
@@ -20,7 +45,10 @@ class DayPlan extends React.Component {
                    1:00 am
                  </td>
                  <td style={{"border-style": "solid", "border-color": "black"}}>
-                   Type here
+                   <input style={{backgroundColor:this.state.plan[0][1]}} type="text" onChange={(event) => {this.SetPlan(event, this.state.plan[0])}} value={this.state.plan[0][0]} />
+                   <img src={checkmark} onClick={() => {this.Done(this.state.plan[0])}} />
+                   <img src={reset} onClick={() => {this.ClearDone(this.state.plan[0])}} />
+                   <img src={close} onClick={() => {this.CloseDone(this.state.plan[0])}} />
                  </td>
                </tr>];
     for(i=0;i!=11;i++){
