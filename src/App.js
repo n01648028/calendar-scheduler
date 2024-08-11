@@ -1,6 +1,6 @@
 import './App.css';
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link,} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import Calendar from './Calendar';
 import Settings from './Settings';
@@ -11,21 +11,29 @@ import DayPlan from './DayPlan';
 import DailyPlan from './DailyPlan';
 
 function App() {
-  const [dayPlans, setDayPlans] = useState([]);
+  const [dayPlans, setDayPlans] = useState(Array.from({ length: 30 }, () => [])); // Initialize dayPlans
   const [dailyPlan, setDailyPlan] = useState([]);
-  var i;
-  for(i=0;i!=30;i++){
-    dayPlans.push([]);
-  }
+  const [settings, setSettings] = useState({
+    showForms: true,
+    calendarColor: '#0048FF',
+    boxLength: 100,
+  });
+
+  useEffect(() => {
+    // Load settings from local storage or other source if needed
+    const savedSettings = JSON.parse(localStorage.getItem('calendarSettings'));
+    if (savedSettings) {
+      setSettings(savedSettings);
+    }
+  }, []);
+
   return (
     <div className="App">
-      <br></br>
-      Welcome to our Calendar App! devloped by Danyyil & Russell. 
-      <br></br>  
-      <br></br>
-      Please use the links below to navigate the app. 
-      <br></br>
-      <br></br>
+      <br />
+      Welcome to our Calendar App! Developed by Danyyil & Russell.
+      <br /><br />
+      Please use the links below to navigate the app.
+      <br /><br />
       <BrowserRouter>
         <div>
           <nav>
@@ -34,14 +42,13 @@ function App() {
             <Link to="/Open">Open</Link> | {" "}
             <Link to="/Save">Save</Link> | {" "}
             <Link to="/Settings">Settings</Link> | {" "}
-
           </nav>
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/Open" element={<Open />} />
-            <Route path="/Save" element={<Save />} />
-            <Route path="/Settings" element={<Settings />} />
+            <Route path="/Save" element={<Save dayPlans={dayPlans} settings={settings} />} />
+            <Route path="/Settings" element={<Settings settings={settings} setSettings={setSettings} />} />
             <Route path="/DayPlan/:day" element={<UseParams><DayPlan plans={dayPlans} /></UseParams>} />
             <Route path="/DailyPlan" element={<UseParams><DailyPlan plan={dailyPlan} /></UseParams>} />
           </Routes>

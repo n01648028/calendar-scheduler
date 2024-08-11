@@ -1,52 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const SavePage = () => {
-  const [allPlans, setAllPlans] = useState([]);
+const Save = () => {
+  const navigate = useNavigate();
 
-  const loadPlansFromStorage = () => {
-    const savedPlans = [];
-    for (let i = 1; i <= 31; i++) {
-      const plans = JSON.parse(localStorage.getItem(`plans_${i}`)) || [];
-      if (plans.length > 0) {
-        savedPlans.push({ date: i, plans });
-      }
-    }
-    setAllPlans(savedPlans);
+  const saveAllPlans = () => {
+    // Gather all plans from local storage and convert to JSON
+    const days = Array.from({ length: 31 }, (_, i) => i + 1); // Adjust this as per your calendar
+    const allPlans = {};
+
+    days.forEach(day => {
+      const plans = JSON.parse(localStorage.getItem(`plans_${day}`)) || [];
+      allPlans[`day_${day}`] = plans;
+    });
+
+    // Save to local storage
+    localStorage.setItem('all_plans', JSON.stringify(allPlans));
+
+    // Create a JSON blob and download it
+    const blob = new Blob([JSON.stringify(allPlans, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'all_plans.json';
+    a.click();
+    URL.revokeObjectURL(url);
+
+    alert('All plans saved and downloaded successfully!');
   };
 
-  useEffect(() => {
-    loadPlansFromStorage(); // Load plans whenever the SavePage is rendered
-  }, []);
+  const discardAllPlans = () => {
+    // Clear all plans from local storage
+    const days = Array.from({ length: 31 }, (_, i) => i + 1); // Adjust this as per your calendar
 
-  const handleSaveAll = () => {
-    alert('All plans have been saved successfully!');
+    days.forEach(day => {
+      localStorage.removeItem(`plans_${day}`);
+    });
+
+    // Clear saved all plans
+    localStorage.removeItem('all_plans');
+    alert('All changes discarded!');
   };
 
   return (
-    <div className="save-page-container">
-      <h1>Review and Save Plans</h1>
-      <ul>
-        {allPlans.length > 0 ? (
-          allPlans.map(({ date, plans }) => (
-            <li key={date}>
-              <h3>Date: {date}</h3>
-              <ul>
-                {plans.map((plan, index) => (
-                  <li key={index}>
-                    {plan.plan} - {plan.category}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))
-        ) : (
-          <p>No plans have been made yet.</p>
-        )}
-      </ul>
-      <button onClick={handleSaveAll}>Save All Plans</button>
+    <div>
+      <h2>Save and Discard Plans</h2>
+      <button onClick={saveAllPlans}>Save All Plans</button>
+      <button onClick={discardAllPlans}>Discard All Changes</button>
+      <button onClick={() => navigate("/calendar")}>Back to Calendar</button>
     </div>
   );
 };
 
-export default SavePage;
-
+export default Save;

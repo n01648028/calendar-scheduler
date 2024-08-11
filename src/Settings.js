@@ -1,50 +1,45 @@
 import React from 'react';
 
 class Settings extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showForms: true, // Updated to control forms visibility
-      calendarColor: '#0048FF',
-      boxLength: 100, // Default box length
-    };
-  }
-
   handleToggleForms = () => {
-    this.setState({ showForms: !this.state.showForms });
+    this.props.setSettings((prevSettings) => ({
+      ...prevSettings,
+      showForms: !prevSettings.showForms,
+    }));
   };
 
   handleColorChange = (e) => {
-    this.setState({ calendarColor: e.target.value });
+    this.props.setSettings((prevSettings) => ({
+      ...prevSettings,
+      calendarColor: e.target.value,
+    }));
   };
 
   handleBoxLengthChange = (e) => {
-    this.setState({ boxLength: e.target.value });
+    this.props.setSettings((prevSettings) => ({
+      ...prevSettings,
+      boxLength: e.target.value,
+    }));
   };
 
   saveSettings = () => {
-    const settings = {
-      showForms: this.state.showForms, // Updated to reflect new state name
-      calendarColor: this.state.calendarColor,
-      boxLength: this.state.boxLength,
-    };
-    localStorage.setItem('calendarSettings', JSON.stringify(settings));
+    localStorage.setItem('calendarSettings', JSON.stringify(this.props.settings));
     alert('Settings saved!');
   };
 
   render() {
-    const { showForms, calendarColor, boxLength } = this.state;
+    const { showForms, calendarColor, boxLength } = this.props.settings;
 
     return (
       <div className="settings-container">
         <h1>Settings</h1>
         <div className="settings-option">
           <label>
-            Show Forms: {/* Updated label */}
+            Show Forms:
             <input
               type="checkbox"
               checked={showForms}
-              onChange={this.handleToggleForms} // Updated handler
+              onChange={this.handleToggleForms}
             />
           </label>
         </div>
