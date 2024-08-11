@@ -8,13 +8,13 @@ import ImgOnClickArgument from './ImgOnClickArgument';
 class DayPlan extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {day: 0, plan: [], debug: 0};
+    this.state = {day: 0, plan: []};
     this.SetPlan = this.SetPlan.bind(this);
     this.Done = this.Done.bind(this);
     this.ClearDone = this.ClearDone.bind(this);
     this.CloseDone = this.CloseDone.bind(this);
   }
-  SetPlan(event, plan) {//alert(plan[0]);
+  SetPlan(event, plan) {
     plan[0]=event.target.value;
     this.setState(prevState => (this.state));
   }
@@ -37,7 +37,7 @@ class DayPlan extends React.Component {
     var SetPlan;
     var { day } = this.props.params;
     if(this.props.plans[day-1].length == 0){
-      for(i=0;i!=30;i++){
+      for(i=0;i!=23;i++){
         this.props.plans[day-1].push(["", ""]);
       }
     }
@@ -57,7 +57,7 @@ class DayPlan extends React.Component {
                    <img src={close} onClick={() => {this.CloseDone(this.state.plan[0])}} />
                  </td>
                </tr>];
-    for(i=1;i!=11;i++){//alert(JSON.stringify(plan));
+    for(i=1;i!=11;i++){
       periods.push(<tr>
                      <td style={{"border-style": "solid", "border-color": "black"}}>
                        {i}:00 am<br />

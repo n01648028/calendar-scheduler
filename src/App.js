@@ -8,9 +8,11 @@ import Save from './Save';
 import Open from './Open';
 import UseParams from './UseParams';
 import DayPlan from './DayPlan';
+import DailyPlan from './DailyPlan';
 
 function App() {
   const [dayPlans, setDayPlans] = useState([]);
+  const [dailyPlan, setDailyPlan] = useState([]);
   var i;
   for(i=0;i!=30;i++){
     dayPlans.push([]);
@@ -41,7 +43,7 @@ function App() {
             <Route path="/Save" element={<Save />} />
             <Route path="/Settings" element={<Settings />} />
             <Route path="/DayPlan/:day" element={<UseParams><DayPlan plans={dayPlans} /></UseParams>} />
-
+            <Route path="/DailyPlan" element={<UseParams><DailyPlan plan={dailyPlan} /></UseParams>} />
           </Routes>
         </div>
       </BrowserRouter>

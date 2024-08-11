@@ -49,6 +49,10 @@ const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
     navigate("/DayPlan/" + date);
   };
 
+  const GotoDailyPlan = () => {
+    navigate("/DailyPlan");
+  };
+
   return (
     <td key={colIndex} className="calendar-cell" onClick={handleClick} style={cellStyle}>
       {date}
@@ -66,6 +70,7 @@ const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
           </select>
           <button onClick={handleAddPlan}>Add a Plan</button>
           <button onClick={GotoDayPlan}>Day Plan</button>
+          <button onClick={GotoDailyPlan}>Daily Plan</button>
         </div>
       )}
       <ul>
