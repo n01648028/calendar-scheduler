@@ -6,15 +6,15 @@ class DayPlan extends React.Component {
     this.state = {temperature: 0, weatherDescription: ""};
   }
   render() {
+    var i;
+    var periods;
     var { day } = this.props.params;
-    if(this.props.plans[day].length == 0){
-      alert("a");
-      this.props.plans[day].push("a");
+    if(this.props.plans[day-1].length == 0){
+      for(i=0;i!=30;i++){
+        this.props.plans[day-1].push(["", 0]);
+      }
     }
-    return <div>
-             Make your day plan.
-             <table>
-               <tr>
+    periods = [<tr>
                  <td style={{"border-style": "solid", "border-color": "black"}}>
                    12:00 am<br />
                    1:00 am
@@ -22,34 +22,42 @@ class DayPlan extends React.Component {
                  <td style={{"border-style": "solid", "border-color": "black"}}>
                    Type here
                  </td>
-               </tr>
-               <tr>
-                 <td style={{"border-style": "solid", "border-color": "black"}}>
-                   1:00 am<br />
-                   2:00 am
-                 </td>
-                 <td style={{"border-style": "solid", "border-color": "black"}}>
-                   Type here
-                 </td>
-               </tr>
-               <tr>
-                 <td style={{"border-style": "solid", "border-color": "black"}}>
-                   2:00 am<br />
-                   3:00 am
-                 </td>
-                 <td style={{"border-style": "solid", "border-color": "black"}}>
-                   Type here
-                 </td>
-               </tr>
-               <tr>
-                 <td style={{"border-style": "solid", "border-color": "black"}}>
-                   3:00 am<br />
-                   4:00 am
-                 </td>
-                 <td style={{"border-style": "solid", "border-color": "black"}}>
-                   Type here
-                 </td>
-               </tr>
+               </tr>];
+    for(i=0;i!=11;i++){
+      periods.push(<tr>
+                     <td style={{"border-style": "solid", "border-color": "black"}}>
+                       {i+1}:00 am<br />
+                       {i+2}:00 am
+                     </td>
+                     <td style={{"border-style": "solid", "border-color": "black"}}>
+                       Type here
+                     </td>
+                   </tr>);
+    }
+    for(i=0;i!=10;i++){
+      periods.push(<tr>
+                     <td style={{"border-style": "solid", "border-color": "black"}}>
+                       {i+1}:00 pm<br />
+                       {i+2}:00 pm
+                     </td>
+                     <td style={{"border-style": "solid", "border-color": "black"}}>
+                       Type here
+                     </td>
+                   </tr>);
+    }
+    periods.push(<tr>
+                   <td style={{"border-style": "solid", "border-color": "black"}}>
+                     11:00 pm<br />
+                     12:00 am
+                   </td>
+                   <td style={{"border-style": "solid", "border-color": "black"}}>
+                     Type here
+                   </td>
+                 </tr>);
+    return <div>
+             Make your day plan for day {day}.
+             <table>
+               {periods}
              </table>
            </div>;
   }

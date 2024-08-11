@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
@@ -6,6 +7,7 @@ const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
   const [plans, setPlans] = useState([]);
   const [newPlan, setNewPlan] = useState('');
   const [newCategory, setNewCategory] = useState('Music');
+  const navigate=useNavigate();
 
   useEffect(() => {
     const savedPlans = JSON.parse(localStorage.getItem(`plans_${date}`)) || [];
@@ -43,6 +45,10 @@ const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
     }
   };
 
+  const GotoDayPlan = () => {
+    navigate("/DayPlan/" + date);
+  };
+
   return (
     <td key={colIndex} className="calendar-cell" onClick={handleClick} style={cellStyle}>
       {date}
@@ -59,6 +65,7 @@ const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
             <option value="Event">Event</option>
           </select>
           <button onClick={handleAddPlan}>Add a Plan</button>
+          <button onClick={GotoDayPlan}>Day Plan</button>
         </div>
       )}
       <ul>
