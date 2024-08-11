@@ -1,49 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-class Save extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      plans: JSON.parse(localStorage.getItem('savedPlans')) || [],
-      originalPlans: JSON.parse(localStorage.getItem('savedPlans')) || [],
-      saveStatus: '',
-    };
-  }
+const SavePage = () => {
+  const [allPlans, setAllPlans] = useState([]);
 
-  handleSave = () => {
-    try {
-      localStorage.setItem('savedPlans', JSON.stringify(this.state.plans));
-      this.setState({
-        saveStatus: 'Plans saved successfully!',
-        originalPlans: [...this.state.plans],
-      });
-    } catch (error) {
-      this.setState({ saveStatus: 'Failed to save plans. Please try again.' });
+  const loadPlansFromStorage = () => {
+    const savedPlans = [];
+    for (let i = 1; i <= 31; i++) {
+      const plans = JSON.parse(localStorage.getItem(`plans_${i}`)) || [];
+      if (plans.length > 0) {
+        savedPlans.push({ date: i, plans });
+      }
     }
+    setAllPlans(savedPlans);
   };
 
-  handleDiscard = () => {
-    this.setState({
-      plans: [...this.state.originalPlans],
-      saveStatus: 'Changes discarded.',
-    });
+  useEffect(() => {
+    loadPlansFromStorage(); // Load plans whenever the SavePage is rendered
+  }, []);
+
+  const handleSaveAll = () => {
+    alert('All plans have been saved successfully!');
   };
 
-  render() {
-    return (
-      <div>
-        <br />
-        <button onClick={this.handleSave} className="save-button">
-          Save Plans
-        </button>
-        <button onClick={this.handleDiscard} className="discard-button">
-          Discard Changes
-        </button>
-        <p>This is the save page</p>
-        {this.state.saveStatus && <p>{this.state.saveStatus}</p>}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="save-page-container">
+      <h1>Review and Save Plans</h1>
+      <ul>
+        {allPlans.length > 0 ? (
+          allPlans.map(({ date, plans }) => (
+            <li key={date}>
+              <h3>Date: {date}</h3>
+              <ul>
+                {plans.map((plan, index) => (
+                  <li key={index}>
+                    {plan.plan} - {plan.category}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))
+        ) : (
+          <p>No plans have been made yet.</p>
+        )}
+      </ul>
+      <button onClick={handleSaveAll}>Save All Plans</button>
+    </div>
+  );
+};
 
-export default Save;
+export default SavePage;
+

@@ -12,12 +12,6 @@ const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
     setPlans(savedPlans);
   }, [date]);
 
-  useEffect(() => {
-    if (date !== null && date !== undefined) {
-      localStorage.setItem(`plans_${date}`, JSON.stringify(plans));
-    }
-  }, [plans, date]);
-
   const handleClick = () => {
     if (date !== null && date !== undefined) {
       onClick(date);
@@ -33,6 +27,7 @@ const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
     if (newPlan.trim()) {
       const updatedPlans = [...plans, { plan: newPlan, category: newCategory }];
       setPlans(updatedPlans);
+      localStorage.setItem(`plans_${date}`, JSON.stringify(updatedPlans)); // Save immediately to local storage
       setNewPlan('');
       setNewCategory('Music');
       setShowPlanForm(false);
@@ -42,6 +37,7 @@ const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
   const handleRemovePlan = (index) => {
     const updatedPlans = plans.filter((_, i) => i !== index);
     setPlans(updatedPlans);
+    localStorage.setItem(`plans_${date}`, JSON.stringify(updatedPlans)); // Save updated plans to local storage
     if (updatedPlans.length === 0) {
       setShowPlanForm(false);
     }
@@ -87,3 +83,4 @@ DayBox.propTypes = {
 };
 
 export default DayBox;
+
