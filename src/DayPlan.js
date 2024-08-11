@@ -6,12 +6,11 @@ import close from './close.svg';
 class DayPlan extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {day: 0, plan: [], weatherDescription: ""};
+    this.state = {day: 0, plan: []};
   }
   SetPlan(event, plan) {
     plan[0]=event.target.value;
     this.setState(prevState => (this.state));
-    //alert(JSON.stringify(plan));
   }
   Done(plan) {
     plan[1]="green";
