@@ -21,8 +21,8 @@ const Home = () => {
         <p>Schedule your Days</p>
       </header>
       <img
-          src={srcLoc}
-          alt={altStr}
+          src="https://cdn.jim-nielsen.com/macos/512/calendar-2021-04-29.png?rf=1024"
+          alt="Calendar"
           className="calendar-image"
         />
       <main className="home-main">
