@@ -25,7 +25,7 @@ const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
     e.stopPropagation();
   };
 
-  const handleAddPlan = () => {
+  const handleAddPlan = (e) => {
     if (newPlan.trim()) {
       const updatedPlans = [...plans, { plan: newPlan, category: newCategory }];
       setPlans(updatedPlans);
