@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
 
 const Save = (props) => {
   const navigate = useNavigate();
+  const [message, setMessage] = useState("");
 
   const saveAllPlans = () => {
     // Gather all plans from local storage and convert to JSON
@@ -31,7 +33,7 @@ const Save = (props) => {
     allPlans.dailyPlan=props.dailyPlan;
     saveJson(allPlans, 'all_plans.json');
 
-    alert('All plans saved and downloaded successfully!');
+    setMessage('All plans saved and downloaded successfully!');
   };
 
   const discardAllPlans = () => {
@@ -43,7 +45,7 @@ const Save = (props) => {
 
     localStorage.removeItem('all_plans');
 
-    alert('All changes discarded!');
+    setMessage('All changes discarded!');
   };
 
   return (
@@ -52,6 +54,11 @@ const Save = (props) => {
       <button onClick={saveAllPlans}>Save All Plans</button>
       <button onClick={discardAllPlans}>Discard All Changes</button>
       <button onClick={() => navigate("/calendar")}>Back to Calendar</button>
+      {message != "" && (
+        <Alert dismissible variant="success" onClose={() => setMessage("")}>
+          {message}
+        </Alert>
+      )}
     </div>
   );
 };
