@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Save = () => {
+const Save = (props) => {
   const navigate = useNavigate();
 
   const saveAllPlans = () => {
@@ -27,7 +27,8 @@ const Save = () => {
       a.click();
       URL.revokeObjectURL(url);
     };
-
+    allPlans.dayPlans=props.dayPlans;
+    allPlans.dailyPlan=props.dailyPlan;
     saveJson(allPlans, 'all_plans.json');
 
     alert('All plans saved and downloaded successfully!');

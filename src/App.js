@@ -47,8 +47,10 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/Open" element={<Open />} />
-            <Route path="/Save" element={<Save dayPlans={dayPlans} settings={settings} />} />
+            <Route path="/Save" element={<Save dayPlans={dayPlans} dailyPlan={dailyPlan} settings={settings} />} />
             <Route path="/Settings" element={<Settings settings={settings} setSettings={setSettings} />} />
+            <Route path="/DayPlan/:day" element={<UseParams><DayPlan plans={dayPlans} /></UseParams>} />
+            <Route path="/DailyPlan" element={<UseParams><DailyPlan plan={dailyPlan} /></UseParams>} />
           </Routes>
         </div>
       </BrowserRouter>
