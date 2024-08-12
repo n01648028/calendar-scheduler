@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Open = () => {
+const Open = (props) => {
   const [data, setData] = useState(null);
   const [filteredData, setFilteredData] = useState({});
 
@@ -36,6 +36,8 @@ const Open = () => {
           }
 
           setData(jsonData);
+          props.setDayPlan(jsonData.dayPlans);
+          props.setDailyPlan(jsonData.dailyPlan);
           setFilteredData(daysWithChanges);
         } catch (error) {
           console.error('Invalid JSON file:', error);
