@@ -30,7 +30,7 @@ const Save = (props) => {
       URL.revokeObjectURL(url);
     };
     allPlans.dayPlans=props.dayPlans;
-    allPlans.dailyPlan=props.dailyPlan;
+    allPlans.dailyPlan=props.dailyPlan;alert(JSON.stringify(props.dayPlans));
     saveJson(allPlans, 'all_plans.json');
 
     setMessage('All plans saved and downloaded successfully!');
