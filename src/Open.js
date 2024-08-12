@@ -26,7 +26,7 @@ const Open = () => {
       <input type="file" accept=".json" onChange={handleFileChange} />
       {data && (
         <div>
-          <h3>Loaded Data:</h3>
+          <h3> Day Schedule :</h3>
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
       )}
