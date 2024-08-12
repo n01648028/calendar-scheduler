@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
+const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle, weather }) => {
   const [showPlanForm, setShowPlanForm] = useState(false);
   const [plans, setPlans] = useState([]);
   const [newPlan, setNewPlan] = useState('');
@@ -56,6 +56,7 @@ const DayBox = ({ date, colIndex, onClick, isActive, showForm, cellStyle }) => {
   return (
     <td key={colIndex} className="calendar-cell" onClick={handleClick} style={cellStyle}>
       {date}
+      <div>{weather}</div>
       {isActive && showForm && showPlanForm && (
         <div className="plan-form" onClick={handleFormClick}>
           <input
