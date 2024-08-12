@@ -20,24 +20,24 @@ const ItemList = () => {
   const dates = Array.from({ length: totalDays }, (_, i) => i + 1);
 
   useEffect(() => {
-    const latitude = 43.653225;
-    const longitude = -79.383186;
-    const apiKey = 'mqey0foiks41msndfyvgu25pb6t95vu4dj1v22z3';
-    const apiUrl = `https://www.meteosource.com/api/v1/free/point?lat=${latitude}&lon=${longitude}&sections=all&timezone=UTC&language=en&units=metric&key=${apiKey}`;
+    //var latitude = 43.653225;
+    //var longitude = -79.383186;
+    //const apiKey = 'mqey0foiks41msndfyvgu25pb6t95vu4dj1v22z3';
+    //const apiUrl = `https://www.meteosource.com/api/v1/free/point?lat=${latitude}&lon=${longitude}&sections=all&timezone=UTC&language=en&units=metric&key=${apiKey}`;
     const savedSettings = JSON.parse(localStorage.getItem('calendarSettings'));
     if (savedSettings) {
       setSettings(savedSettings);
     }
-    fetch(apiUrl)
-      .then(response => {
-        if (!response.ok) throw new Error(`Failed to fetch weather data: ${response.statusText}`);
-        return response.json();
-      })
-      .then(data => {
-        setWeatherData(data);
-      })
-      .catch(error => {})
-      .finally(() => {});
+    //fetch(apiUrl)
+    //  .then(response => {
+    //    if (!response.ok) throw new Error(`Failed to fetch weather data: ${response.statusText}`);
+    //    return response.json();
+    //  })
+    //  .then(data => {
+    //    setWeatherData(data);
+    //  })
+    //  .catch(error => {})
+    //  .finally(() => {});
   }, []);
 
   const handleDayClick = (date) => {
