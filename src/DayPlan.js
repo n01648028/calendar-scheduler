@@ -1,121 +1,120 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import checkmark from './checkmark.svg';
 import reset from './reset.svg';
 import close from './close.svg';
 import TextBox from './TextBox';
 import ImgOnClickArgument from './ImgOnClickArgument';
-
 class DayPlan extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { day: 0, plan: [] };
+    this.state = {day: 0, plan: []};
     this.SetPlan = this.SetPlan.bind(this);
     this.Done = this.Done.bind(this);
     this.ClearDone = this.ClearDone.bind(this);
     this.CloseDone = this.CloseDone.bind(this);
   }
-
-  componentDidMount() {
-    const { day } = this.props.params;
-    this.loadPlan(day);
-  }
-
-  componentDidUpdate(prevProps) {
-    const { day } = this.props.params;
-    if (prevProps.params.day !== day) {
-      this.loadPlan(day);
-    }
-  }
-
-  loadPlan(day) {
-    const savedPlan = JSON.parse(localStorage.getItem(`dayPlan-${day}`)) || [];
-    if (savedPlan.length === 0) {
-      for (let i = 0; i < 23; i++) {
-        savedPlan.push(["", ""]);
-      }
-    }
-    this.setState({ day, plan: savedPlan });
-  }
-
-  savePlan(day, plan) {
-    localStorage.setItem(`dayPlan-${day}`, JSON.stringify(plan));
-  }
-
   SetPlan(event, plan) {
-    plan[0] = event.target.value;
-    this.setState(prevState => ({
-      plan: [...prevState.plan]
-    }), () => this.savePlan(this.state.day, this.state.plan));
+    plan[0]=event.target.value;
+    this.setState(prevState => (this.state));
   }
-
   Done(plan) {
-    plan[1] = "green";
-    this.setState(prevState => ({
-      plan: [...prevState.plan]
-    }), () => this.savePlan(this.state.day, this.state.plan));
+    plan[1]="green";
+    this.setState(prevState => (this.state));
   }
-
   ClearDone(plan) {
-    plan[1] = "";
-    this.setState(prevState => ({
-      plan: [...prevState.plan]
-    }), () => this.savePlan(this.state.day, this.state.plan));
+    plan[1]="";
+    this.setState(prevState => (this.state));
   }
-
   CloseDone(plan) {
-    plan[0] = "";
-    plan[1] = "";
-    this.setState(prevState => ({
-      plan: [...prevState.plan]
-    }), () => this.savePlan(this.state.day, this.state.plan));
+    plan[0]="";
+    plan[1]="";
+    this.setState(prevState => (this.state));
   }
-
   render() {
-    const { day } = this.props.params;
-    const { plan } = this.state;
-    const periods = [];
-
-    if (plan.length === 0) {
-      for (let i = 0; i < 23; i++) {
-        plan.push(["", ""]);
+    var i;
+    var periods;
+    var SetPlan;
+    var { day } = this.props.params;
+    if(this.props.plans[day-1].length == 0){
+      for(i=0;i!=23;i++){
+        this.props.plans[day-1].push(["", ""]);
       }
     }
-
-    const times = [
-      "12:00 am", "1:00 am", "2:00 am", "3:00 am", "4:00 am", "5:00 am", "6:00 am", "7:00 am", "8:00 am", "9:00 am", "10:00 am", "11:00 am",
-      "12:00 pm", "1:00 pm", "2:00 pm", "3:00 pm", "4:00 pm", "5:00 pm", "6:00 pm", "7:00 pm", "8:00 pm", "9:00 pm", "10:00 pm", "11:00 pm"
-    ];
-
-    for (let i = 0; i < 23; i++) {
-      periods.push(
-        <tr key={i}>
-          <td style={{ borderStyle: "solid", borderColor: "black" }}>
-            {times[i]}<br />{times[i + 1]}
-          </td>
-          <td style={{ borderStyle: "solid", borderColor: "black" }}>
-            <TextBox
-              backgroundColor={plan[i][1]}
-              value={plan[i][0]}
-              onChange={this.SetPlan}
-              onChangeArgument={plan[i]}
-            />
-            <ImgOnClickArgument src={checkmark} onClick={this.Done} onClickArgument={plan[i]} />
-            <ImgOnClickArgument src={reset} onClick={this.ClearDone} onClickArgument={plan[i]} />
-            <ImgOnClickArgument src={close} onClick={this.CloseDone} onClickArgument={plan[i]} />
-          </td>
-        </tr>
-      );
+    if(this.state.day != day){
+      this.state.day = day;
+      this.state.plan = this.props.plans[day-1];
     }
-
-    return (
-      <div>
-        Make your day plan for day {day}.
-        <table>
-          {periods}
-        </table>
-      </div>
-    );
+    periods = [<tr>
+                 <td style={{"border-style": "solid", "border-color": "black"}}>
+                   12:00 am<br />
+                   1:00 am
+                 </td>
+                 <td style={{"border-style": "solid", "border-color": "black"}}>
+                   <input style={{backgroundColor:this.state.plan[0][1]}} type="text" onChange={(event) => {this.SetPlan(event, this.state.plan[0])}} value={this.state.plan[0][0]} />
+                   <img src={checkmark} onClick={() => {this.Done(this.state.plan[0])}} />
+                   <img src={reset} onClick={() => {this.ClearDone(this.state.plan[0])}} />
+                   <img src={close} onClick={() => {this.CloseDone(this.state.plan[0])}} />
+                 </td>
+               </tr>];
+    for(i=1;i!=11;i++){
+      periods.push(<tr>
+                     <td style={{"border-style": "solid", "border-color": "black"}}>
+                       {i}:00 am<br />
+                       {i+1}:00 am
+                     </td>
+                     <td style={{"border-style": "solid", "border-color": "black"}}>
+                       <TextBox backgroundColor={this.state.plan[i][1]} value={this.state.plan[i][0]} onChange={this.SetPlan} onChangeArgument={this.state.plan[i]} />
+                       <ImgOnClickArgument src={checkmark} onClick={this.Done} onClickArgument={this.state.plan[i]} />
+                       <ImgOnClickArgument src={reset} onClick={this.ClearDone} onClickArgument={this.state.plan[i]} />
+                       <ImgOnClickArgument src={close} onClick={this.CloseDone} onClickArgument={this.state.plan[i]} />
+                     </td>
+                   </tr>);
+    }
+    periods.push(<tr>
+                   <td style={{"border-style": "solid", "border-color": "black"}}>
+                     11:00 am<br />
+                     1:00 pm
+                   </td>
+                   <td style={{"border-style": "solid", "border-color": "black"}}>
+                     <input style={{backgroundColor:this.state.plan[11][1]}} type="text" onChange={(event) => {this.SetPlan(event, this.state.plan[11])}} value={this.state.plan[11][0]} />
+                     <img src={checkmark} onClick={() => {this.Done(this.state.plan[11])}} />
+                     <img src={reset} onClick={() => {this.ClearDone(this.state.plan[11])}} />
+                     <img src={close} onClick={() => {this.CloseDone(this.state.plan[11])}} />
+                   </td>
+                 </tr>);
+    for(i=0;i!=10;i++){
+      periods.push(<tr>
+                     <td style={{"border-style": "solid", "border-color": "black"}}>
+                       {i+1}:00 pm<br />
+                       {i+2}:00 pm
+                     </td>
+                     <td style={{"border-style": "solid", "border-color": "black"}}>
+                       <TextBox backgroundColor={this.state.plan[i+12][1]} value={this.state.plan[i+12][0]} onChange={this.SetPlan} onChangeArgument={this.state.plan[i+12]} />
+                       <ImgOnClickArgument src={checkmark} onClick={this.Done} onClickArgument={this.state.plan[i+12]} />
+                       <ImgOnClickArgument src={reset} onClick={this.ClearDone} onClickArgument={this.state.plan[i+12]} />
+                       <ImgOnClickArgument src={close} onClick={this.CloseDone} onClickArgument={this.state.plan[i+12]} />
+                     </td>
+                   </tr>);
+    }
+    periods.push(<tr>
+                   <td style={{"border-style": "solid", "border-color": "black"}}>
+                     11:00 pm<br />
+                     12:00 am
+                   </td>
+                   <td style={{"border-style": "solid", "border-color": "black"}}>
+                     <input style={{backgroundColor:this.state.plan[22][1]}} type="text" onChange={(event) => {this.SetPlan(event, this.state.plan[22])}} value={this.state.plan[22][0]} />
+                     <img src={checkmark} onClick={() => {this.Done(this.state.plan[22])}} />
+                     <img src={reset} onClick={() => {this.ClearDone(this.state.plan[22])}} />
+                     <img src={close} onClick={() => {this.CloseDone(this.state.plan[22])}} />
+                   </td>
+                 </tr>);
+    return <div>
+             Make your day plan for day {day}.
+             <table>
+               {periods}
+             </table>
+           </div>;
   }
 }
-
 export default DayPlan;
