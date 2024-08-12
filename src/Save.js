@@ -12,33 +12,36 @@ const Save = () => {
     days.forEach(day => {
       const plans = JSON.parse(localStorage.getItem(`plans_${day}`)) || [];
       allPlans[`day_${day}`] = plans;
+
     });
 
-    // Save to local storage
     localStorage.setItem('all_plans', JSON.stringify(allPlans));
 
-    // Create a JSON blob and download it
-    const blob = new Blob([JSON.stringify(allPlans, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'all_plans.json';
-    a.click();
-    URL.revokeObjectURL(url);
+
+    const saveJson = (data, filename) => {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+
+    saveJson(allPlans, 'all_plans.json');
 
     alert('All plans saved and downloaded successfully!');
   };
 
   const discardAllPlans = () => {
-    // Clear all plans from local storage
     const days = Array.from({ length: 31 }, (_, i) => i + 1); // Adjust this as per your calendar
 
     days.forEach(day => {
       localStorage.removeItem(`plans_${day}`);
     });
 
-    // Clear saved all plans
     localStorage.removeItem('all_plans');
+
     alert('All changes discarded!');
   };
 
@@ -53,3 +56,4 @@ const Save = () => {
 };
 
 export default Save;
+
