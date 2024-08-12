@@ -16,6 +16,7 @@ const ItemList = () => {
   const today = new Date();
   const totalDays = new Date(today.getFullYear(), today.getMonth()+1, 0).getDate();
   const startDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay(); // Adjust based on the starting day of the month
+  const day = today.getDate();
 
   const dates = Array.from({ length: totalDays }, (_, i) => i + 1);
 
@@ -90,7 +91,8 @@ const ItemList = () => {
                     cellStyle={{
                       width: `${settings.boxLength}px`,
                       height: `${settings.boxLength}px`,
-                    }} // Pass box length as cellStyle
+                    }} // Pass box length as cellStylezzweatherData.daily.data == null || weatherData.daily.data.length <= date - day ? 10 : weatherData.daily.data[0]
+                    weather={day > date || weatherData == null ? "" : "default"}
                   />
                 );
               })}
